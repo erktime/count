@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Cell Counter</title>
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/style.css" rel="stylesheet">
+      <script src="js/lib/require-jquery.js"></script>
+      <script src="js/lib/bootstrap.min.js"></script>
+      <script>
+        require.config({
+          paths: {
+            "underscore": "js/lib/underscore",
+            "backbone": "js/lib/backbone",
+            "text": "js/lib/text",
+            "src": "js/src"
+          }
+        });
+
+        require(["jquery", "src/main"], function($, app) {
+          $(app.boot);
+        });
+      </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div id="headline" class="span8 offset2"><h1>Cell Counter</h1></div>
+      </div>
+    </div> <!-- /.container -->
+  </body>
+</html>
