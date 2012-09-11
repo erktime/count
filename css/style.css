@@ -1,0 +1,23 @@
+.counter {
+  float: left;
+  min-width: 100px;
+  min-height: 50px;
+  color: #FFF;
+  background: #0088CC;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 5px;
+}
+
+.counter .icon-edit {
+  cursor: pointer;
+  float: right;
+}
+
+.counter.edit {
+  padding: 10px;
+}
+
+.counter.edit .done {
+  float: right;
+}
