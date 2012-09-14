@@ -2,25 +2,15 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "src/models/Counter",
-    "src/views/CounterView"
+    "src/views/AppView"
     ],
-    function($, _, Backbone, Counter, CounterView) {
+    function($, _, Backbone, AppView) {
   return {
     boot: function () {
-      var counter = new Counter();
-      var view = new CounterView({
-        model: counter,
-        className: "counter"
+      var view = new AppView({
+        el: $("#app")
       });
-
-      $("#counters").append(view.render().el);
-
-      $("body").on("keyup", function (event) {
-        if (counter.get("keyCode") === event.which) {
-          counter.increment();
-        }
-      });
+      view.render();
     }
   };
 });

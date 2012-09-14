@@ -21,3 +21,15 @@
 .counter.edit .done {
   float: right;
 }
+
+.counter .reset {
+  display: none;
+}
+
+.counter.maxReached .reset {
+  display: block;
+}
+
+.counter.maxReached {
+  background: #900;
+}

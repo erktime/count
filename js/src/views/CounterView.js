@@ -12,17 +12,26 @@ define([
     events: {
       "click .icon-edit": "renderEditMode",
       "click .done": "updateCounter",
+      "click .reset": "onReset",
+      "focus input": "onInputFocus",
       "keydown input[name='keyCode']": "onKeyCodeDown",
-      "keyup input[name='keyCode']": "onKeyCodeUp"
+      "keyup input": "onKeyCodeUp"
     },
 
     initialize: function () {
-      this.model.bind("change", this.render, this);
+      this.model.on("change", this.render, this);
     },
 
     render: function () {
       var data = this.model.toJSON();
       this.$el.html(template(data)).removeClass("edit");
+
+      if (this.model.get("maxReached")) {
+        this.$el.addClass("maxReached");
+      } else {
+        this.$el.removeClass("maxReached");
+      }
+
       return this;
     },
 
@@ -31,6 +40,7 @@ define([
       data.ascii = this.getAscii(data.keyCode);
       this.$el.html(editTemplate(data)).addClass("edit");
       this.$("input[name='name']").focus().select();
+      return this;
     },
 
     updateCounter: function (event) {
@@ -78,6 +88,19 @@ define([
       } else {
         return "";
       }
+    },
+
+    onInputFocus: function (event) {
+      $(event.currentTarget).select();
+    },
+
+    isEditing: function () {
+      return this.$el.hasClass("edit");
+    },
+
+    onReset: function (event) {
+      this.model.set({count: 0, maxReached: false});
+      this.render();
     }
   });
 
