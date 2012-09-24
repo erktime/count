@@ -8,7 +8,7 @@ define([
   return {
     boot: function () {
       var view = new AppView({
-        el: $("#app")
+        el: $(".container")
       });
       view.render();
     }

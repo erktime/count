@@ -6,10 +6,15 @@
 <input type="text" name="name" value="{{name}}" placeholder="Name" />
 
 <label for="keyCode">Key code</label>
-<input type="text" name="keyCode" value="{{ascii}}" />
+<input type="text" name="keyCode" value="{{ascii}}"
+    {{#global}} disabled="disabled" {{/global}} />
 
 <label for="maxCount">Max count</label>
 <input type="text" name="maxCount" value="{{maxCount}}" />
 
 <label for="interval">Interval</label>
 <input type="text" name="interval" value="{{interval}}" />
+
+<hr />
+<label for="count">Current count</label>
+<input type="text" name="count" value="{{count}}" />

@@ -8,21 +8,35 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
       keyCode: null
     },
 
+    initialize: function(attrs, option) {
+      this.on("change:count", this.onChangeCount);
+    },
+
     increment: function () {
       var maxCount = this.get("maxCount");
-
       if (maxCount === -1 || this.get("count") < maxCount) {
         var newCount = this.get("count") + this.get("interval");
         this.set("count", newCount);
-        if (this.maxCount !== -1 && newCount >= maxCount) {
-          this.set("maxReached", true);
-        }
       }
     },
 
+    decrement: function () {
+      var count = this.get("count");
+      var interval = this.get("interval");
+      this.set("count", Math.max(0, count - interval));
+    },
+
     isMaxReached: function () {
-      // return (this.get("maxCount") >= this.get("count"));
       return (this.get("maxReached") === true);
+    },
+
+    onChangeCount: function (model, count) {
+      var maxCount = model.get("maxCount");
+      if (maxCount !== -1 && count >= maxCount) {
+        this.set("maxReached", true);
+      } else {
+        this.set("maxReached", false);
+      }
     }
   });
 });

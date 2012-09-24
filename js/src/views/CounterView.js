@@ -38,6 +38,7 @@ define([
     renderEditMode: function (event) {
       var data = this.model.toJSON();
       data.ascii = this.getAscii(data.keyCode);
+      data.global = this.$el.hasClass("global");
       this.$el.html(editTemplate(data)).addClass("edit");
       this.$("input[name='name']").focus().select();
       return this;
@@ -47,7 +48,8 @@ define([
       var obj = {
         name: this.$("input[name='name']").val(),
         maxCount: parseInt(this.$("input[name='maxCount']").val(), 10),
-        interval: parseInt(this.$("input[name='interval']").val(), 10)
+        interval: parseInt(this.$("input[name='interval']").val(), 10),
+        count: parseInt(this.$("input[name='count']").val(), 10)
       };
 
       var keyCode = this.$("input[name='keyCode']").data("keyCode");

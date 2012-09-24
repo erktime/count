@@ -25,10 +25,21 @@
   <body>
     <div class="container">
       <div class="row">
-        <div id="headline" class="span8 offset2"><h1>Cell Counter</h1></div>
+        <div class="span3">
+          <h3>Cell Counter</h3>
+        </div>
+        <div class="timer span9"></div>
       </div>
       <div class="row">
-        <div id="app"></div>
+        <div class="row">
+          <div class="controls span12">
+            <button class='addCounter'>Add counter</button>
+            <button class='undo' disabled='disabled'>Undo last key</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="counters clearfix span12"></div>
+        </div>
       </div>
     </div> <!-- /.container -->
 

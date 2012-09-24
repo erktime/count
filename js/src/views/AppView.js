@@ -4,11 +4,12 @@ define([
     "backbone",
     "src/models/Counter",
     "src/views/CounterView",
-    "text!src/templates/app.html"
-    ], function ($, _, Backbone, Counter, CounterView, template) {
+    "src/views/TimerView"
+    ], function ($, _, Backbone, Counter, CounterView, TimerView) {
   var view = Backbone.View.extend({
     events: {
-      "click .addCounter": "onAddCounter"
+      "click .addCounter": "addCounter",
+      "click .undo": "undo"
     },
 
     initialize: function () {
@@ -16,34 +17,44 @@ define([
         model: Counter
       });
 
-      this.collection.bind("change:maxReached", this.onCounterMaxReached);
+      this.collection.on("change:maxReached", this.onCounterMaxReached, this);
       this.counterViews = {};
+      this.undoList = [];
     },
 
     render: function () {
-      var handlebarTemplate = Handlebars.compile(template);
-      this.$el.html(handlebarTemplate());
-
       var self = this;
       $("body").on("keyup", function (event) {
-        var editing = _.any(self.counterViews, function (view) {
-          return view.isEditing();
-        });
-
-        // Ignore all key inputs when a counter is being edited.
-        if (!editing) {
-          self.collection.each(function (counter) {
-            if (counter.get("keyCode") === event.which) {
-              counter.increment();
-            }
-          });
+        if (self.isCounting) {
+          self.keyPress(event.which);
         }
+      });
+
+      this.globalCounterView = this.addCounter();
+      this.globalCounterView.$el.addClass("global");
+      this.globalCounterView.model.set({
+        name: "Global"
+      });
+
+      this.timerView = new TimerView({
+        el: this.$(".timer")
+      });
+      this.timerView.render();
+      this.timerView.on("start", function () {
+        self.isCounting = true;
+      });
+      this.timerView.on("stop", function () {
+        self.isCounting = false;
+      });
+      this.timerView.on("timeout", function () {
+        self.isCounting = false;
+        self.playAlert();
       });
 
       return this;
     },
 
-    onAddCounter: function (event) {
+    addCounter: function () {
       var counter = new Counter();
       this.collection.add(counter);
       var counterView = new CounterView({
@@ -53,12 +64,60 @@ define([
 
       this.counterViews[counter.cid] = counterView;
       this.$(".counters").append(counterView.renderEditMode().el);
+      return counterView;
     },
 
     onCounterMaxReached: function (model, isMaxReached) {
       if (isMaxReached) {
-        $("#sound")[0].play();
+        this.playAlert();
+        this.timerView.stop();
       }
+    },
+
+    keyPress: function (keyCode) {
+      var match = false;
+      this.collection.each(function (counter) {
+        if (counter.get("keyCode") === keyCode) {
+          match = true;
+          counter.increment();
+        }
+      });
+
+      if (match) {
+        this.globalCounterView.model.increment();
+      }
+
+      this.undoList.push(keyCode);
+      this.$(".undo").removeAttr("disabled");
+    },
+
+    keyUnPress: function (keyCode) {
+      var match = false;
+      this.collection.each(function (counter) {
+        if (counter.get("keyCode") === keyCode) {
+          match = true;
+          counter.decrement();
+        }
+      });
+
+      if (match) {
+        this.globalCounterView.model.decrement();
+      }
+    },
+
+    undo: function () {
+      var keyCode = this.undoList.pop();
+      if (keyCode) {
+        this.keyUnPress(keyCode);
+      }
+
+      if (!this.undoList.length) {
+        this.$(".undo").attr("disabled", "disabled");
+      }
+    },
+
+    playAlert: function () {
+      $("#sound")[0].play();
     }
   });
 

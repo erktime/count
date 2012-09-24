@@ -9,7 +9,7 @@
   padding: 5px;
 }
 
-.counter .icon-edit {
+.icon-edit {
   cursor: pointer;
   float: right;
 }
@@ -32,4 +32,27 @@
 
 .counter.maxReached {
   background: #900;
+}
+
+.counter.global {
+  background: black;
+}
+
+.timer .edit {
+}
+
+.timer input[type="text"] {
+  width: 50px;
+}
+
+.timer button {
+  width: 75px;
+}
+
+.timer.counting .edit {
+}
+
+.timer table.display td {
+  /* text-align: center; */
+  width: 150px;
 }
