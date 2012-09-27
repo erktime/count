@@ -2,8 +2,10 @@
 <html>
   <head>
       <title>Cell Counter</title>
-      <link href="css/bootstrap.min.css" rel="stylesheet">
-      <link href="css/style.css" rel="stylesheet">
+      <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <link href="css/style.css" rel="stylesheet" media="screen">
+      <link rel="stylesheet" type="text/css" media="print" href="css/print.css" />
+
       <script src="js/lib/require-jquery.js"></script>
       <script src="js/lib/bootstrap.min.js"></script>
       <script src="js/lib/handlebars.js"></script>
@@ -26,18 +28,19 @@
     <div class="container">
       <div class="row heading">
         <div class="span3">
-          <h3>Cell Counter</h3>
+          <h3 class="title">Cell Counter</h3>
+          <input class="observationName" type="text"
+              placeholder="Observation name" />
+          <div class="date"></div>
         </div>
         <div class="timer span6"></div>
-        <div class="appControls span3">
-          <button class='addCounter'>Add counter</button>
-          <button class='undo' disabled='disabled'>Undo last key</button>
+        <div class="appControls">
+          <button class='btn addCounter'>Add counter</button>
+          <button class='btn undo' disabled='disabled'>Undo last key</button>
         </div>
       </div>
       <div class="row">
-        <div class="row">
-          <div class="counters clearfix span12"></div>
-        </div>
+        <div class="counters clearfix span12"></div>
       </div>
     </div> <!-- /.container -->
 

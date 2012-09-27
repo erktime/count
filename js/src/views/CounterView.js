@@ -12,6 +12,7 @@ define([
     events: {
       "click .icon-edit": "renderEditMode",
       "click .done": "updateCounter",
+      "click .delete": "removeCounter",
       "click .reset": "onReset",
       "focus input": "onInputFocus",
       "keydown input[name='keyCode']": "onKeyCodeDown",
@@ -103,6 +104,17 @@ define([
     onReset: function (event) {
       this.model.set({count: 0, maxReached: false});
       this.render();
+    },
+
+    destroy: function () {
+      this.off();
+      this.remove();
+    },
+
+    removeCounter: function (event) {
+      if (confirm("Are you sure you want to delete this counter?")) {
+        this.model.destroy();
+      }
     }
   });
 

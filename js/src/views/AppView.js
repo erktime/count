@@ -7,13 +7,15 @@ define([
     "src/views/TimerView"
     ], function ($, _, Backbone, Counter, CounterView, TimerView) {
   var view = Backbone.View.extend({
+    MONTHS: "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
+
     events: {
       "click .addCounter": "addCounter",
       "click .undo": "undo"
     },
 
     initialize: function () {
-      this.collection = new Backbone.Collection({
+      this.collection = new Backbone.Collection([], {
         model: Counter
       });
 
@@ -51,11 +53,17 @@ define([
         self.playAlert();
       });
 
+      // Setup date for print view
+      var d = new Date();
+      $(".date").text(this.MONTHS[d.getMonth()] + " " + d.getDate()
+          + ", " + d.getFullYear());
+
       return this;
     },
 
     addCounter: function () {
       var counter = new Counter();
+      counter.on("destroy", this.onCounterDelete, this);
       this.collection.add(counter);
       var counterView = new CounterView({
         model: counter,
@@ -117,6 +125,15 @@ define([
 
     playAlert: function () {
       $("#sound")[0].play();
+    },
+
+    /**
+     * Callback for counter being destroyed.
+     * @param {Counter} counter The deleted counter.
+     */
+    onCounterDelete: function (counter) {
+      this.collection.remove(counter);
+      this.counterViews[counter.cid].destroy();
     }
   });
 

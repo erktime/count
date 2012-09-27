@@ -129,8 +129,8 @@ define([
         return "";
       }
 
-      var min = Math.floor(seconds / 60);
-      var hour = Math.floor(min / 60);
+      var hour = Math.floor(seconds / 60 / 60);
+      var min = Math.floor((seconds / 60) % 60);
       var sec = seconds % 60;
       return this.zeroFill(hour, 2) + "<span class='divider'>:</span>"
           + this.zeroFill(min, 2) + "<span class='divider'>:</span>"

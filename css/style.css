@@ -5,9 +5,14 @@
   position: relative;
 }
 
+.row.heading .date {
+  display: none;
+}
+
 input[disabled] {
   background-color: #CCC;
 }
+
 
 /* =App Controls
 ----------------------------------------------- */
@@ -83,7 +88,6 @@ input[disabled] {
 .timer .heading {
   font-size: 30px;
   padding: 10px;
-  /* border-bottom: 1px solid #CCC; */
   text-decoration: underline;
   color: #666;
 }
@@ -129,3 +133,4 @@ input[disabled] {
   text-align: center;
   width: 240px;
 }
+
