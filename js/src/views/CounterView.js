@@ -9,6 +9,14 @@ define([
   var editTemplate = Handlebars.compile(counterEditTemplate);
 
   var view = Backbone.View.extend({
+
+    SPECIAL_KEYS: {
+      "37": "0x2190", // Left arrow
+      "38": "0x2191", // Up arrow
+      "39": "0x2192", // Right arrow
+      "40": "0x2193"  // Down arrow
+    },
+
     events: {
       "click .icon-edit": "renderEditMode",
       "click .done": "updateCounter",
@@ -87,7 +95,12 @@ define([
 
     getAscii: function (keyCode) {
       if (keyCode) {
-        return String.fromCharCode(keyCode);
+        var specialKey = this.SPECIAL_KEYS[keyCode + ""];
+        if (specialKey) {
+          return String.fromCharCode(specialKey);
+        } else {
+          return String.fromCharCode(keyCode);
+        }
       } else {
         return "";
       }
