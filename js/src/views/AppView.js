@@ -33,7 +33,7 @@ define([
       this.globalCounterView = this.addCounter();
       this.globalCounterView.$el.addClass("global");
       this.globalCounterView.model.set({
-        name: "Global"
+        name: "Total Count"
       });
 
       this.timerView = new TimerView({
@@ -85,10 +85,9 @@ define([
 
       if (match) {
         this.globalCounterView.model.increment();
+        this.undoList.push(keyCode);
+        this.$(".undo").removeAttr("disabled");
       }
-
-      this.undoList.push(keyCode);
-      this.$(".undo").removeAttr("disabled");
     },
 
     keyUnPress: function (keyCode) {

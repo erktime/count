@@ -1,12 +1,48 @@
+.row.heading {
+  border-bottom: 3px solid #DDD;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+input[disabled] {
+  background-color: #CCC;
+}
+
+/* =App Controls
+----------------------------------------------- */
+.appControls {
+  bottom: 5px;
+  right: 0;
+  position: absolute;
+}
+
+/* =Counter
+----------------------------------------------- */
+
 .counter {
   float: left;
-  min-width: 100px;
-  min-height: 50px;
+  width: 150px;
+  height: 140px;
   color: #FFF;
   background: #0088CC;
   border-radius: 5px;
-  margin: 20px;
+  margin: 20px 20px 20px 0;
   padding: 5px;
+}
+
+.counter:first-child {
+}
+
+.counter .name {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.counter .count {
+  font-size: 32px;
+  text-align: center;
+  padding: 20px;
 }
 
 .icon-edit {
@@ -16,6 +52,8 @@
 
 .counter.edit {
   padding: 10px;
+  width: auto;
+  height: auto;
 }
 
 .counter.edit .done {
@@ -24,6 +62,7 @@
 
 .counter .reset {
   display: none;
+  margin: 0 auto;
 }
 
 .counter.maxReached .reset {
@@ -38,11 +77,40 @@
   background: black;
 }
 
-.timer .edit {
+/* =Timer
+----------------------------------------------- */
+
+.timer .heading {
+  font-size: 30px;
+  padding: 10px;
+  /* border-bottom: 1px solid #CCC; */
+  text-decoration: underline;
+  color: #666;
+}
+
+.timer .total,
+.timer .remaining {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.timer .remaining.editing {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.timer .divider {
+  display: inline-block;
+  margin: 0 2px;
 }
 
 .timer input[type="text"] {
   width: 50px;
+}
+
+.timer .controls {
+  margin-top: 20px;
+  text-align: center;
 }
 
 .timer button {
@@ -52,7 +120,12 @@
 .timer.counting .edit {
 }
 
+.timer table.display {
+  margin: 0 auto;
+}
+
 .timer table.display td {
-  /* text-align: center; */
-  width: 150px;
+  /* border: 1px solid black; */
+  text-align: center;
+  width: 240px;
 }

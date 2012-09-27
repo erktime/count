@@ -47,7 +47,7 @@ define([
     updateCounter: function (event) {
       var obj = {
         name: this.$("input[name='name']").val(),
-        maxCount: parseInt(this.$("input[name='maxCount']").val(), 10),
+        maxCount: parseInt(this.$("input[name='maxCount']").val(), 10) || null,
         interval: parseInt(this.$("input[name='interval']").val(), 10),
         count: parseInt(this.$("input[name='count']").val(), 10)
       };

@@ -3,7 +3,7 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
     defaults: {
       name: "",
       count: 0,
-      maxCount: -1,
+      maxCount: null,
       interval: 1,
       keyCode: null
     },
@@ -14,7 +14,7 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
 
     increment: function () {
       var maxCount = this.get("maxCount");
-      if (maxCount === -1 || this.get("count") < maxCount) {
+      if (_.isNull(maxCount) || this.get("count") < maxCount) {
         var newCount = this.get("count") + this.get("interval");
         this.set("count", newCount);
       }
@@ -32,7 +32,7 @@ define(["jquery", "underscore", "backbone"], function($, _, Backbone) {
 
     onChangeCount: function (model, count) {
       var maxCount = model.get("maxCount");
-      if (maxCount !== -1 && count >= maxCount) {
+      if (!_.isNull(maxCount) && count >= maxCount) {
         this.set("maxReached", true);
       } else {
         this.set("maxReached", false);

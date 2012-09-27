@@ -40,7 +40,8 @@ define([
     },
 
     renderEditMode: function () {
-      this.$(".remaining").html(editTemplate(this.endTimerConfig));
+      this.$(".remaining").addClass("editing").html(
+          editTemplate(this.endTimerConfig));
       this.$(".edit").removeClass("edit").addClass("done").text("Done");
       this.$(".toggle").attr("disabled", "disabled");
       this.$(".reset").attr("disabled", "disabled");
@@ -86,7 +87,7 @@ define([
       if (!_.isNull(this.endSeconds)) {
         var remaining = this.endSeconds - diff;
         if (remaining >= 0) {
-          this.$(".remaining").text(this.formatTime(remaining));
+          this.$(".remaining").html(this.formatTime(remaining));
         } else {
           this.trigger("timeout");
           this.stop();
@@ -95,10 +96,7 @@ define([
       }
 
       var sec = this.seconds + diff;
-      var min = Math.floor(sec / 60);
-      sec = sec % 60;
-
-      this.$(".total").text(min + ":" + sec);
+      this.$(".total").html(this.formatTime(sec));
     },
 
     saveOptions: function () {
@@ -132,8 +130,11 @@ define([
       }
 
       var min = Math.floor(seconds / 60);
+      var hour = Math.floor(min / 60);
       var sec = seconds % 60;
-      return min + ":" + sec;
+      return this.zeroFill(hour, 2) + "<span class='divider'>:</span>"
+          + this.zeroFill(min, 2) + "<span class='divider'>:</span>"
+          + this.zeroFill(sec, 2);
     },
 
     start: function () {
@@ -170,6 +171,14 @@ define([
       }
 
       this.trigger("stop");
+    },
+
+    zeroFill: function (number, width) {
+      width -= number.toString().length;
+      if (width > 0) {
+        return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
+      }
+      return number + ""; // always return a string
     }
   });
 
