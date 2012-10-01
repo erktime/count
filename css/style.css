@@ -30,13 +30,14 @@ input[disabled] {
   width: 150px;
   height: 140px;
   color: #FFF;
-  background: #0088CC;
-  border-radius: 5px;
   margin: 20px 20px 20px 0;
-  padding: 5px;
 }
 
-.counter:first-child {
+.counter .inner {
+  background: #0088CC;
+  border-radius: 5px 5px 0 0;
+  padding: 5px;
+  min-height: 100px;
 }
 
 .counter .name {
@@ -47,7 +48,7 @@ input[disabled] {
 .counter .count {
   font-size: 32px;
   text-align: center;
-  padding: 20px;
+  padding: 10px;
 }
 
 .icon-edit {
@@ -59,6 +60,8 @@ input[disabled] {
   padding: 10px;
   width: auto;
   height: auto;
+  background: #0088CC;
+  border-radius: 5px;
 }
 
 .counter.edit .done {
@@ -74,12 +77,26 @@ input[disabled] {
   display: block;
 }
 
-.counter.maxReached {
+.counter.maxReached .inner {
   background: #900;
 }
 
-.counter.global {
+.counter.global .inner {
   background: black;
+}
+
+.counter.global .keyCode {
+  background: black;
+}
+
+.counter .keyCode {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #005884;
+  color: #FFF;
+  border-radius: 0 0 5px 5px;
+  padding: 5px 0;
+  text-align: center;
 }
 
 /* =Timer
@@ -87,7 +104,7 @@ input[disabled] {
 
 .timer .heading {
   font-size: 30px;
-  padding: 10px;
+  padding: 10px 10px 10px 0;
   text-decoration: underline;
   color: #666;
 }
@@ -114,11 +131,10 @@ input[disabled] {
 
 .timer .controls {
   margin-top: 20px;
-  text-align: center;
 }
 
 .timer button {
-  width: 75px;
+  width: 85px;
 }
 
 .timer.counting .edit {
@@ -130,7 +146,6 @@ input[disabled] {
 
 .timer table.display td {
   /* border: 1px solid black; */
-  text-align: center;
   width: 240px;
 }
 

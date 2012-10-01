@@ -33,6 +33,7 @@ define([
 
     render: function () {
       var data = this.model.toJSON();
+      data.keyCodeLabel = this.getAscii(this.model.get("keyCode"));
       this.$el.html(template(data)).removeClass("edit");
 
       if (this.model.get("maxReached")) {

@@ -20,6 +20,10 @@ button {
   font-weight: bold;
 }
 
+.counter .keyCode {
+  display: none;
+}
+
 .timer .total,
 .timer .remaining {
   font-weight: bold;

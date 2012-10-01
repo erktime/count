@@ -11,7 +11,8 @@ define([
 
     events: {
       "click .addCounter": "addCounter",
-      "click .undo": "undo"
+      "click .undo": "undo",
+      "click .resetAll": "resetAll"
     },
 
     initialize: function () {
@@ -134,6 +135,14 @@ define([
     onCounterDelete: function (counter) {
       this.collection.remove(counter);
       this.counterViews[counter.cid].destroy();
+    },
+
+    resetAll: function () {
+      if (confirm("Are you sure you want to reset all counters?")) {
+        this.collection.each(function (counter) {
+          counter.set("count", 0);
+        });
+      }
     }
   });
 
