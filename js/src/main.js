@@ -11,6 +11,9 @@ define([
         el: $(".container")
       });
       view.render();
+
+      $(".email").attr("href",
+          "mailto: " + "aaron" + "erk@g" + "mail." + "com");
     }
   };
 });
