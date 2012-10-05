@@ -28,7 +28,7 @@
     <div class="container">
       <div class="row heading">
         <div class="span3">
-          <div class="branding">
+          <div class="branding noprint">
             <h1 class="title">Cell Counter</h1>
             <h2>by <a class="email" href="mailto:">Aaron Erkenswick</a></h2>
           </div>
@@ -40,7 +40,15 @@
         <div class="appControls">
           <button class='btn addCounter btn-small'>Add counter</button>
           <button class='btn undo btn-small' disabled='disabled'>Undo last key</button>
-          <button class='btn resetAll btn-danger btn-small'>Reset all</button>
+          <div class="btn-group">
+            <button class="btn btn-small btn-danger resetCounters">Reset</button>
+            <button class="btn dropdown-toggle btn-small btn-danger" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="deleteCounters">Delete counters</a></li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -49,7 +57,7 @@
     </div> <!-- /.container -->
 
     <div style="display: none;">
-      <audio id="sound" src="media/droid.ogg" preload="auto" />
+      <audio id="sound" src="media/fin.ogg" preload="auto" />
     </div>
   </body>
 </html>

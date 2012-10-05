@@ -32,10 +32,13 @@ define([
     },
 
     render: function () {
+      if (this.model.get("global")) {
+        this.$el.addClass("global");
+      }
+
       var data = this.model.toJSON();
       data.keyCodeLabel = this.getAscii(this.model.get("keyCode"));
       this.$el.html(template(data)).removeClass("edit");
-
       if (this.model.get("maxReached")) {
         this.$el.addClass("maxReached");
       } else {
@@ -46,9 +49,12 @@ define([
     },
 
     renderEditMode: function (event) {
+      if (this.model.get("global")) {
+        this.$el.addClass("global");
+      }
+
       var data = this.model.toJSON();
       data.ascii = this.getAscii(data.keyCode);
-      data.global = this.$el.hasClass("global");
       this.$el.html(editTemplate(data)).addClass("edit");
       this.$("input[name='name']").focus().select();
       return this;
@@ -62,19 +68,18 @@ define([
         count: parseInt(this.$("input[name='count']").val(), 10)
       };
 
-      var keyCode = this.$("input[name='keyCode']").data("keyCode");
-      if (keyCode) {
-        obj.keyCode = keyCode;
+      if (!this.model.get("global")) {
+        obj.addToGlobal = this.$("input[name='addToGlobal']")[0].checked;
+        obj.keyCode = this.$("input[name='keyCode']").data("keyCode");
       }
 
       // Silent the event, which allows us to trigger render, regarldess
       // of change in model state.
-      this.model.set(obj, {silent: true});
+      this.model.save(obj, {silent: true});
       this.render();
     },
 
     onKeyCodeDown: function (event) {
-      // TODO need to handle non ascii chars (arrow keys)
       var keyCode = event.which;
 
       // Ignore tab, and any modifier keys
@@ -116,7 +121,7 @@ define([
     },
 
     onReset: function (event) {
-      this.model.set({count: 0, maxReached: false});
+      this.model.save({count: 0, maxReached: false});
       this.render();
     },
 

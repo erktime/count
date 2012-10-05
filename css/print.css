@@ -4,6 +4,8 @@ body {
   font-size: 12pt;
 }
 
+.noprint,
+.btn-group,
 button {
   display: none;
 }
@@ -18,10 +20,6 @@ button {
 
 .counter .name {
   font-weight: bold;
-}
-
-.counter .keyCode {
-  display: none;
 }
 
 .timer .total,
@@ -53,6 +51,3 @@ button {
   border-bottom: 1px solid #000;
 }
 
-.branding {
-  display: none;
-}

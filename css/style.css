@@ -43,6 +43,14 @@ input[disabled] {
   position: absolute;
 }
 
+.appControls button {
+  vertical-align: bottom;
+}
+
+.appControls .btn-group {
+  display: inline;
+}
+
 /* =Counter
 ----------------------------------------------- */
 
@@ -98,7 +106,8 @@ input[disabled] {
   display: block;
 }
 
-.counter.maxReached .inner {
+.counter.maxReached .inner,
+.counter.global.maxReached .inner {
   background: #900;
 }
 
@@ -118,6 +127,11 @@ input[disabled] {
   border-radius: 0 0 5px 5px;
   padding: 5px 0;
   text-align: center;
+}
+
+.counter input[type='checkbox'] {
+  margin-right: 3px;
+  vertical-align: top;
 }
 
 /* =Timer
@@ -168,5 +182,10 @@ input[disabled] {
 .timer table.display td {
   /* border: 1px solid black; */
   width: 240px;
+}
+
+.timeout {
+  color: #F00;
+  text-decoration: blink;
 }
 

@@ -12,37 +12,34 @@ define([
     events: {
       "click .addCounter": "addCounter",
       "click .undo": "undo",
-      "click .resetAll": "resetAll"
+      "click .resetCounters": "resetAll",
+      "click .deleteCounters": "deleteAll"
     },
 
     initialize: function () {
-      this.collection = new Backbone.Collection([], {
-        model: Counter
-      });
+      this.collection = new Backbone.Collection();
+      this.collection.model = Counter;
 
+      this.collection.on("reset", this.collectionReset, this);
       this.collection.on("change:maxReached", this.onCounterMaxReached, this);
       this.counterViews = {};
       this.undoList = [];
+      this.globalCounterView = null;
     },
 
     render: function () {
       var self = this;
+      this.collection.fetch();
+
       $("body").on("keyup", function (event) {
         if (self.isCounting) {
           self.keyPress(event.which);
         }
       });
 
-      this.globalCounterView = this.addCounter();
-      this.globalCounterView.$el.addClass("global");
-      this.globalCounterView.model.set({
-        name: "Total Count"
-      });
-
       this.timerView = new TimerView({
         el: this.$(".timer")
       });
-      this.timerView.render();
       this.timerView.on("start", function () {
         self.isCounting = true;
       });
@@ -62,17 +59,42 @@ define([
       return this;
     },
 
+    collectionReset: function () {
+      if (this.collection.length === 0) {
+        var globalCounter = this.collection.create({
+          name: "Total Count",
+          global: true
+        });
+      }
+
+      this.collection.each(function (counter) {
+        this.createCounterView(counter, false);
+      }, this);
+    },
+
     addCounter: function () {
-      var counter = new Counter();
+      var counter = this.collection.create({});
+      return this.createCounterView(counter, true);
+    },
+
+    createCounterView: function (counter, editMode) {
       counter.on("destroy", this.onCounterDelete, this);
-      this.collection.add(counter);
       var counterView = new CounterView({
         model: counter,
         className: "counter"
       });
-
       this.counterViews[counter.cid] = counterView;
-      this.$(".counters").append(counterView.renderEditMode().el);
+
+      if (editMode) {
+        this.$(".counters").append(counterView.renderEditMode().el);
+      } else {
+        this.$(".counters").append(counterView.render().el);
+      }
+
+      if (counter.get("global")) {
+        this.globalCounterView = counterView;
+      }
+
       return counterView;
     },
 
@@ -86,8 +108,8 @@ define([
     keyPress: function (keyCode) {
       var match = false;
       this.collection.each(function (counter) {
-        if (counter.get("keyCode") === keyCode) {
-          match = true;
+        if (counter.get("keyCode") === keyCode && !counter.isMaxReached()) {
+          match = counter.get("addToGlobal");
           counter.increment();
         }
       });
@@ -138,10 +160,23 @@ define([
     },
 
     resetAll: function () {
-      if (confirm("Are you sure you want to reset all counters?")) {
+      if (confirm("Are you sure you want to reset all counters to zero?")) {
         this.collection.each(function (counter) {
-          counter.set("count", 0);
+          counter.save("count", 0);
         });
+      }
+    }, 
+
+    deleteAll: function () {
+      if (confirm("Are you sure you want to delete all created counters?")) {
+        _.each(this.counterViews, function (view) {
+          view.destroy();
+          view.model.off();
+        });
+
+        // Failsafe way to cleanup persisted counters.
+        Backbone.sync("deleteAll");
+        this.collection.reset([]);
       }
     }
   });

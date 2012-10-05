@@ -22,11 +22,10 @@ define([
       this.seconds = 0;
       this.endSeconds = null;
 
-      this.endTimerConfig = {
-        hours: null,
-        minutes: null,
-        seconds: null
-      };
+      var persistedConfig = window.localStorage.getItem("endTimerConfig");
+      this.endTimerConfig = persistedConfig ? JSON.parse(persistedConfig)
+          : { hours: null, minutes: null, seconds: null };
+      this.reset();
     },
 
     render: function () {
@@ -61,6 +60,11 @@ define([
       this.timer = null;
       this.seconds = 0;
 
+      this.resetCountdown();
+      this.render();
+    },
+
+    resetCountdown: function () {
       // Configure countdown timer.
       var endCount = 0;
       if (!_.isNaN(this.endTimerConfig.hours)) {
@@ -76,8 +80,6 @@ define([
       }
 
       this.endSeconds = (endCount > 0) ? endCount : null;
-
-      this.render();
     },
 
     update: function () {
@@ -91,6 +93,9 @@ define([
         } else {
           this.trigger("timeout");
           this.stop();
+          this.resetCountdown();
+          this.render();
+          this.$(".remaining").addClass("timeout");
           return;
         }
       }
@@ -121,6 +126,9 @@ define([
         this.endTimerConfig.seconds = null;
       }
 
+      window.localStorage.setItem("endTimerConfig",
+          JSON.stringify(this.endTimerConfig));
+
       this.reset();
     },
 
@@ -144,6 +152,7 @@ define([
       this.$(".edit").attr("disabled", "disabled");
       this.$(".toggle").removeClass("btn-primary").addClass("btn-danger")
           .text("Pause");
+      this.$(".remaining").removeClass("timeout");
       this.trigger("start");
     },
 

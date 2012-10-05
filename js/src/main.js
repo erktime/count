@@ -2,9 +2,10 @@ define([
     "jquery",
     "underscore",
     "backbone",
-    "src/views/AppView"
+    "src/views/AppView",
+    "src/LocalStorage"
     ],
-    function($, _, Backbone, AppView) {
+    function($, _, Backbone, AppView, LocalStorage) {
   return {
     boot: function () {
       var view = new AppView({

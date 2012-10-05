@@ -16,11 +16,21 @@
 <label for="interval">Interval</label>
 <input type="text" name="interval" value="{{interval}}" />
 
+{{^global}}
+<label>
+  <input type="checkbox" name="addToGlobal"
+      {{#addToGlobal}}checked="checked"{{/addToGlobal}} />
+  Add to total counter
+</label>
+{{/global}}
+
 <hr />
 <label for="count">Current count</label>
 <input type="text" name="count" value="{{count}}" />
 
+{{^global}}
 <div>
   <button class="delete btn btn-danger btn-mini"
       title="Delete counter">Delete</button>
 </div>
+{{/global}}
