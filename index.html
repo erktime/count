@@ -7,19 +7,28 @@
       <link rel="stylesheet" type="text/css" media="print" href="css/print.css" />
 
       <script src="js/lib/require-jquery.js"></script>
-      <script src="js/lib/bootstrap.min.js"></script>
-      <script src="js/lib/handlebars.js"></script>
       <script>
         require.config({
           paths: {
             "underscore": "js/lib/underscore",
             "backbone": "js/lib/backbone",
             "text": "js/lib/text",
+            "handlebars": "js/lib/handlebars",
+            "bootstrap": "js/lib/bootstrap",
             "src": "js/src"
+          },
+          shims: {
+            "handlebars": {
+              exports: "Handlebars"
+            },
+            "bootstrap": {
+              deps: ['jquery']
+            }
           }
         });
 
-        require(["jquery", "src/main"], function($, app) {
+        require(["jquery", "src/main"],
+            function($, app) {
           $(app.boot);
         });
       </script>
@@ -59,7 +68,6 @@
     <div style="display: none;">
       <audio id="sound" src="media/fin.ogg" preload="auto" />
     </div>
-
     <script type="text/javascript">
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-2306795-4']);
