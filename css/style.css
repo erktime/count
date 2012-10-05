@@ -1,0 +1,191 @@
+/* =Misc
+----------------------------------------------- */
+.row.heading {
+  border-bottom: 3px solid #DDD;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.row.heading .date {
+  display: none;
+}
+
+input[disabled] {
+  background-color: #CCC;
+}
+
+.branding {
+  margin-bottom: 15px;
+}
+
+.branding h1 {
+  font-size: 26px;
+  line-height: 26px;
+  margin: 0;
+}
+
+.branding h2 {
+  font-size: 12px;
+  line-height: 12px;
+  margin: 0;
+}
+
+.branding a:hover {
+  color: #0088CC;
+}
+
+/* =App Controls
+----------------------------------------------- */
+.appControls {
+  bottom: 5px;
+  right: 0;
+  position: absolute;
+}
+
+.appControls button {
+  vertical-align: bottom;
+}
+
+.appControls .btn-group {
+  display: inline;
+}
+
+/* =Counter
+----------------------------------------------- */
+
+.counter {
+  float: left;
+  width: 150px;
+  height: 140px;
+  color: #FFF;
+  margin: 20px 20px 20px 0;
+}
+
+.counter .inner {
+  background: #0088CC;
+  border-radius: 5px 5px 0 0;
+  padding: 5px;
+  min-height: 100px;
+}
+
+.counter .name {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.counter .count {
+  font-size: 32px;
+  text-align: center;
+  padding: 10px;
+}
+
+.icon-edit {
+  cursor: pointer;
+  float: right;
+}
+
+.counter.edit {
+  padding: 10px;
+  width: auto;
+  height: auto;
+  background: #0088CC;
+  border-radius: 5px;
+}
+
+.counter.edit .done {
+  float: right;
+}
+
+.counter .reset {
+  display: none;
+  margin: 0 auto;
+}
+
+.counter.maxReached .reset {
+  display: block;
+}
+
+.counter.maxReached .inner,
+.counter.global.maxReached .inner {
+  background: #900;
+}
+
+.counter.global .inner {
+  background: black;
+}
+
+.counter.global .keyCode {
+  background: black;
+}
+
+.counter .keyCode {
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #005884;
+  color: #FFF;
+  border-radius: 0 0 5px 5px;
+  padding: 5px 0;
+  text-align: center;
+}
+
+.counter input[type='checkbox'] {
+  margin-right: 3px;
+  vertical-align: top;
+}
+
+/* =Timer
+----------------------------------------------- */
+
+.timer .heading {
+  font-size: 30px;
+  padding: 10px 10px 10px 0;
+  text-decoration: underline;
+  color: #666;
+}
+
+.timer .total,
+.timer .remaining {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.timer .remaining.editing {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.timer .divider {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.timer input[type="text"] {
+  width: 50px;
+}
+
+.timer .controls {
+  margin-top: 20px;
+}
+
+.timer button {
+  width: 85px;
+}
+
+.timer.counting .edit {
+}
+
+.timer table.display {
+  margin: 0 auto;
+}
+
+.timer table.display td {
+  /* border: 1px solid black; */
+  width: 240px;
+}
+
+.timeout {
+  color: #F00;
+  text-decoration: blink;
+}
+

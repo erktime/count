@@ -1,1 +1,63 @@
-My GitHub Page
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>Cell Counter</title>
+      <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+      <link href="css/style.css" rel="stylesheet" media="screen">
+      <link rel="stylesheet" type="text/css" media="print" href="css/print.css" />
+
+      <script src="js/lib/require-jquery.js"></script>
+      <script src="js/lib/bootstrap.min.js"></script>
+      <script src="js/lib/handlebars.js"></script>
+      <script>
+        require.config({
+          paths: {
+            "underscore": "js/lib/underscore",
+            "backbone": "js/lib/backbone",
+            "text": "js/lib/text",
+            "src": "js/src"
+          }
+        });
+
+        require(["jquery", "src/main"], function($, app) {
+          $(app.boot);
+        });
+      </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row heading">
+        <div class="span3">
+          <div class="branding noprint">
+            <h1 class="title">Cell Counter</h1>
+            <h2>by <a class="email" href="mailto:">Aaron Erkenswick</a></h2>
+          </div>
+          <input class="observationName" type="text"
+              placeholder="Observation name" />
+          <div class="date"></div>
+        </div>
+        <div class="timer span6"></div>
+        <div class="appControls">
+          <button class='btn addCounter btn-small'>Add counter</button>
+          <button class='btn undo btn-small' disabled='disabled'>Undo last key</button>
+          <div class="btn-group">
+            <button class="btn btn-small btn-danger resetCounters">Reset</button>
+            <button class="btn dropdown-toggle btn-small btn-danger" data-toggle="dropdown">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="deleteCounters">Delete counters</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="counters clearfix span12"></div>
+      </div>
+    </div> <!-- /.container -->
+
+    <div style="display: none;">
+      <audio id="sound" src="media/fin.ogg" preload="auto" />
+    </div>
+  </body>
+</html>
