@@ -4,7 +4,8 @@ define([
     "backbone",
     "src/models/Counter",
     "src/views/CounterView",
-    "src/views/TimerView"
+    "src/views/TimerView",
+    "markdown",
     ], function ($, _, Backbone, Counter, CounterView, TimerView) {
   var markdownConverter = new Markdown.Converter();
 
