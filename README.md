@@ -14,3 +14,5 @@ A cell counting or data counting tool. The app can be used to create totals by p
 
 http://erktime.github.com/count
 
+![screenshot](http://erktime.github.com/count/web/screenshot.png)
+
