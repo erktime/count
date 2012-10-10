@@ -6,6 +6,8 @@ define([
     "src/views/CounterView",
     "src/views/TimerView"
     ], function ($, _, Backbone, Counter, CounterView, TimerView) {
+  var markdownConverter = new Markdown.Converter();
+
   var view = Backbone.View.extend({
     MONTHS: "Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec".split("_"),
 
@@ -32,6 +34,10 @@ define([
       this.collection.fetch();
 
       $("body").on("keyup", function (event) {
+        if ($(event.target).hasClass("preventBubble")) {
+          return;
+        }
+
         if (self.isCounting) {
           self.keyPress(event.which);
         }
@@ -55,6 +61,18 @@ define([
       var d = new Date();
       $(".date").text(this.MONTHS[d.getMonth()] + " " + d.getDate()
           + ", " + d.getFullYear());
+
+      // Setup notes for print view
+      var $noteCopy = this.$("#notesCopy .text");
+      this.$el.on("keyup", "#notes", _.debounce(function (event) {
+        var text = $(event.target).val();
+        // Match normal line breaks and make them new lines. GFM style
+        text = text.replace(/^[\w\<][^\n]*\n+/mg, function (match) {
+          return match + "  \n";
+        });
+
+        $noteCopy.html(markdownConverter.makeHtml(text));
+      }, 200));
 
       return this;
     },

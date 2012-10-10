@@ -35,6 +35,16 @@ input[disabled] {
   color: #0088CC;
 }
 
+#notes {
+  display: block;
+  width: 100%;
+  min-height: 300px;
+}
+
+#notesCopy {
+  display: none;
+}
+
 /* =App Controls
 ----------------------------------------------- */
 .appControls {
@@ -127,6 +137,10 @@ input[disabled] {
   border-radius: 0 0 5px 5px;
   padding: 5px 0;
   text-align: center;
+}
+
+.counter .maxCount {
+  text-align: right;
 }
 
 .counter input[type='checkbox'] {

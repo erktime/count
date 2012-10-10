@@ -37,7 +37,8 @@ define([
       }
 
       var data = this.model.toJSON();
-      data.keyCodeLabel = this.getAscii(this.model.get("keyCode"));
+      data.keyCodeLabel =
+          this.getAscii(this.model.get("keyCode")) || "[no key]";
       this.$el.html(template(data)).removeClass("edit");
       if (this.model.get("maxReached")) {
         this.$el.addClass("maxReached");
@@ -57,6 +58,8 @@ define([
       data.ascii = this.getAscii(data.keyCode);
       this.$el.html(editTemplate(data)).addClass("edit");
       this.$("input[name='name']").focus().select();
+
+      this.$("label").tooltip();
       return this;
     },
 
@@ -67,6 +70,18 @@ define([
         interval: parseInt(this.$("input[name='interval']").val(), 10),
         count: parseInt(this.$("input[name='count']").val(), 10)
       };
+
+      if (_.isNaN(obj.maxCount)) {
+        delete obj.maxCount;
+      }
+
+      if (_.isNaN(obj.interval)) {
+        delete obj.interval;
+      }
+
+      if (_.isNaN(obj.count)) {
+        delete obj.count;
+      }
 
       if (!this.model.get("global")) {
         obj.addToGlobal = this.$("input[name='addToGlobal']")[0].checked;
@@ -85,6 +100,11 @@ define([
       // Ignore tab, and any modifier keys
       if (keyCode === 9 || event.metaKey || event.ctrlKey || event.altKey) {
         return;
+      }
+
+      // Delete key || backspace key.
+      if (keyCode === 8 || keyCode === 46) {
+        keyCode = null;
       }
 
       $(event.currentTarget).data("keyCode", keyCode).val(

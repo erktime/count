@@ -6,6 +6,11 @@
   <div class="name">{{name}}</div>
   <div class="count">{{count}}</div>
   <button class="reset btn">reset</button>
+  {{#maxCount}}
+    <div class="maxCount">
+      max: {{this}}
+    </div>
+  {{/maxCount}}
 </div>
-<div class="keyCode noprint">{{keyCodeLabel}}</div>
+<div class="keyCode noprint">{{^global}}{{keyCodeLabel}}{{/global}}</div>
 

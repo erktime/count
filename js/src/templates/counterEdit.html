@@ -6,14 +6,21 @@
 <label for="name">Name</label>
 <input type="text" name="name" value="{{name}}" placeholder="Name" />
 
-<label for="keyCode">Key code</label>
+<label for="keyCode" data-placement="left"
+    title="The keyboard key that will increment this counter.">
+  Key code <i class="icon-question-sign icon-white"></i>
+</label>
 <input type="text" name="keyCode" value="{{ascii}}"
     {{#global}} disabled="disabled" {{/global}} />
 
-<label for="maxCount">Max count</label>
+<label for="maxCount" data-placement="left"
+  title="Upon reaching the maxiumum count, the timer will stop. Leave blank for no maxiumum.">
+  Max count <i class="icon-question-sign icon-white"></i></label>
 <input type="text" name="maxCount" value="{{maxCount}}" />
 
-<label for="interval">Interval</label>
+<label for="interval" data-placement="left"
+    title="The count should increase by this number.">
+  Interval <i class="icon-question-sign icon-white"></i></label>
 <input type="text" name="interval" value="{{interval}}" />
 
 {{^global}}

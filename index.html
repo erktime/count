@@ -17,6 +17,7 @@
             "text": "js/lib/text",
             "handlebars": "js/lib/handlebars",
             "bootstrap": "js/lib/bootstrap",
+            "markdown": "js/lib/markdown",
             "src": "js/src"
           },
           shims: {
@@ -29,7 +30,7 @@
           }
         });
 
-        require(["jquery", "src/main"],
+        require(["jquery", "src/main", "markdown"],
             function($, app) {
           $(app.boot);
         });
@@ -43,9 +44,16 @@
             <h1 class="title">Cell Counter</h1>
             <h2>by <a class="email" href="mailto:">Aaron Erkenswick</a></h2>
           </div>
-          <input class="observationName" type="text"
+          <input class="observationName preventBubble" type="text"
               placeholder="Observation name" />
           <div class="date"></div>
+          <a href="javascript:window.print()" class="noprint">
+            <i class="icon-print"></i> Print/Export results
+          </a>
+          <div id="notesCopy">
+            <b>Notes</b>
+            <div class="text"></div>
+          </div>
         </div>
         <div class="timer span6"></div>
         <div class="appControls">
@@ -63,7 +71,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="counters clearfix span12"></div>
+        <div class="counters clearfix span9"></div>
+        <div class="clearfix span3 noprint">
+          <strong>Notes</strong>
+          (<em><a target="_blank"
+              href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> supported</em>)
+          <textarea id="notes"></textarea>
+        </div>
       </div>
     </div> <!-- /.container -->
 
