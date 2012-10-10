@@ -85,7 +85,7 @@ define([
 
       if (!this.model.get("global")) {
         obj.addToGlobal = this.$("input[name='addToGlobal']")[0].checked;
-        obj.keyCode = this.$("input[name='keyCode']").data("keyCode");
+        obj.keyCode = this.$("input[name='keyCode']").data("code");
       }
 
       // Silent the event, which allows us to trigger render, regarldess
@@ -107,8 +107,8 @@ define([
         keyCode = null;
       }
 
-      $(event.currentTarget).data("keyCode", keyCode).val(
-          this.getAscii(event.which));
+      $(event.currentTarget).data("code", keyCode).val(
+          this.getAscii(keyCode));
       event.stopPropagation();
       event.preventDefault();
     },
