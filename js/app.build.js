@@ -8,6 +8,7 @@
     "backbone": "../js/lib/backbone",
     "handlebars": "../js/lib/handlebars",
     "bootstrap": "../js/lib/bootstrap",
+    "markdown": "js/lib/markdown",
     "text": "../js/lib/text",
     "src": "../js/src"
   },
