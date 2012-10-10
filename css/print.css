@@ -3,40 +3,32 @@ body {
   font-family: Helvetica, arial, sans-serif;
   font-size: 12pt;
 }
-
 .noprint,
 .btn-group,
 button {
   display: none;
 }
-
 .counters {
   margin: 20px 0;
 }
-
 .counter {
   padding-bottom: 10px;
 }
-
 .counter .name {
   font-weight: bold;
 }
-
 .timer .total,
 .timer .remaining {
   font-weight: bold;
 }
-
 .timer table {
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
 }
-
 .timer table td {
   padding-right: 15px;
 }
-
 .observationName {
   border-width: 0;
   color: #000;
@@ -44,10 +36,19 @@ button {
   font-family: arial;
   font-size: 24px;
 }
-
 .date {
   font-size: 14px;
   margin-bottom: 20px;
   border-bottom: 1px solid #000;
 }
-
+#notesCopy .text {
+  border: 1px solid #CCC;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+#notesCopy .text p {
+  margin: 5px 0;
+}
+#notesCopy .text p:first-child {
+  margin-top: 0;
+}
