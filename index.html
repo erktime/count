@@ -2,6 +2,7 @@
 <html>
   <head>
       <title>COUNT - Cell Or Unknown Noun Totaler</title>
+      <meta name="description" content="A cell counting or data counting tool." />
       <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
       <link href="css/style.css" rel="stylesheet" media="screen">
       <link rel="stylesheet" type="text/css" media="print" href="css/print.css" />
@@ -28,8 +29,7 @@
           }
         });
 
-        require(["jquery", "src/main", "markdown"],
-            function($, app) {
+        require(["jquery", "src/main"], function($, app) {
           $(app.boot);
         });
       </script>
@@ -39,8 +39,11 @@
       <div class="row heading">
         <div class="span3">
           <div class="branding noprint">
-            <h1 class="title">Cell Counter</h1>
-            <h2>by <a class="email" href="mailto:">Aaron Erkenswick</a></h2>
+            <h1 class="title">COUNT</h1>
+            <h2>
+              by <a class="email" href="mailto:">Aaron Erkenswick</a> |
+              <a href="https://github.com/erktime/count">GitHub Repo</a>
+            </h2>
           </div>
           <input class="observationName preventBubble" type="text"
               placeholder="Observation name" />
