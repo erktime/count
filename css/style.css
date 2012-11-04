@@ -30,7 +30,7 @@ input[disabled] {
 #notes {
   display: block;
   width: 100%;
-  min-height: 300px;
+  min-height: 500px;
 }
 #notesCopy {
   display: none;
@@ -51,20 +51,19 @@ input[disabled] {
   width: 150px;
   height: 140px;
   color: #FFF;
-  margin: 20px 20px 20px 0;
+  margin: 10px 20px 0px 0;
 }
 .counter .inner {
   background: #0088CC;
   border-radius: 5px 5px 0 0;
   padding: 5px;
-  min-height: 100px;
+
 }
 .counter .name {
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 1em;
 }
 .counter .count {
-  font-size: 32px;
+  font-size: 2em;
   text-align: center;
   padding: 10px;
 }
@@ -149,7 +148,6 @@ input[disabled] {
   margin: 0 auto;
 }
 .timer table.display td {
-  
   width: 240px;
 }
 .timeout {
