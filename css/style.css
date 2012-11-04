@@ -57,7 +57,7 @@ input[disabled] {
   background: #0088CC;
   border-radius: 5px 5px 0 0;
   padding: 5px;
-
+  min-height: 80px;
 }
 .counter .name {
   font-size: 1em;
@@ -148,6 +148,7 @@ input[disabled] {
   margin: 0 auto;
 }
 .timer table.display td {
+  
   width: 240px;
 }
 .timeout {
