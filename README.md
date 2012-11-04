@@ -1,6 +1,6 @@
 # COUNT - Cell Or Unknown Noun Totaler
 
-A cell counting or data counting tool. The app can be used to create totals by pressing a configured keyboard keys.
+A cell counting or data counting tool. Create a counter, associate it with a keyboard key, then each time the key is pressed, the total for that counter will increase.
 
 **Features**
 * Local persisted storage.
