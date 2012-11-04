@@ -16,10 +16,15 @@ button {
 
 .counter {
   padding-bottom: 10px;
+  min-width: 180px;
+  float: left;
+  margin: 20px;
+  height: 50px;
 }
 
 .counter .name {
   font-weight: bold;
+  max-width: 150px;
 }
 
 .timer .total,
